@@ -1,0 +1,20 @@
+line 0
+line 1
+line 2
+line 3
+line 4
+line 5
+line 6
+line 7
+line 8
+line 9
+ appended line 0
+ appended line 1
+ appended line 2
+ appended line 3
+ appended line 4
+ appended line 5
+ appended line 6
+ appended line 7
+ appended line 8
+ appended line 9
