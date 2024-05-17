@@ -1,7 +1,0 @@
-Storing the data of the climate_result in this file
-""
-Temperature,Rainfall,Humidity,Yield
-73.00, 54.00, 75.00, 22.00
-45.00, 46.00, 78.00, 33.00
-89.00, 78.00, 90.00, 44.00
-22.00, 33.00, 44.00, 55.00
