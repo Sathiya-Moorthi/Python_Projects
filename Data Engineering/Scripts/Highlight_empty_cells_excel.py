@@ -1,5 +1,6 @@
 import pandas as pd
 import re
+import os
 from runtime import runtime
 
 
@@ -12,27 +13,41 @@ def highlight_cells(val, col_name, email_columns):
     else:
         return ''
 
+
 # Function to apply the highlighting to each cell in the DataFrame
 def apply_highlighting(sheet, email_columns):
-    styled_sheet = sheet.style.apply(lambda x: [highlight_cells(x.iloc[i], x.index[i], email_columns) for i in range(len(x))], axis=1)
+    styled_sheet = sheet.style.apply(
+        lambda x: [highlight_cells(x.iloc[i], x.index[i], email_columns) for i in range(len(x))], axis=1)
     return styled_sheet
+
 
 # Function to check email address columns for character limit
 def check_email_columns(sheet):
     email_regex = re.compile(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
-    email_columns = [col for col in sheet.columns if sheet[col].apply(lambda x: isinstance(x, str) and bool(email_regex.match(x))).any()]
+    email_columns = [col for col in sheet.columns if
+                     sheet[col].apply(lambda x: isinstance(x, str) and bool(email_regex.match(x))).any()]
 
     for column in email_columns:
         long_emails = sheet[column][sheet[column].str.len() > 49]
         if not long_emails.empty:
-            print(f"Warning: Email addresses in column '{column}' exceed 49 characters at rows: {long_emails.index.tolist()}")
+            print(
+                f"Warning: Email addresses in column '{column}' exceed 49 characters at rows: {long_emails.index.tolist()}")
 
     return email_columns
 
+
 # Function to process each sheet in the Excel file
-def process_excel_file(excel_file):
+def process_excel_file(excel_file, output_folder):
+    # Ensure the output directory exists
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
+    # Create the full path for the output file
+    file_name = os.path.basename(excel_file)
+    output_file = os.path.join(output_folder, "processed_" + file_name)
+
     xls = pd.ExcelFile(excel_file)
-    with pd.ExcelWriter("processed_" + excel_file, engine='xlsxwriter') as writer:
+    with pd.ExcelWriter(output_file, engine='xlsxwriter') as writer:
         for sheet_name in xls.sheet_names:
             sheet = pd.read_excel(xls, sheet_name=sheet_name)
             email_columns = check_email_columns(sheet)
@@ -40,14 +55,15 @@ def process_excel_file(excel_file):
             styled_sheet.to_excel(writer, sheet_name=sheet_name, index=False)
             print(f"Sheet '{sheet_name}' processed and saved to the output file")
 
+
 # Example usage:
-process_excel_file("Financial Sample.xlsx")
+process_excel_file(
+    r"C:\Users\pc1\PycharmProjects\Python_Projects\Data Engineering\Input files\Financial Sample.xlsx",
+    r"C:\Users\pc1\PycharmProjects\Python_Projects\Data Engineering\Output files"
+)
 
 runtime()
 
 # the below link contains all the errors that I have faced while running this program and other convo reg Highlight_empty_cells_excel, must visit to learn more
 
 """------------------------------------ chatgpt : https://chatgpt.com/share/419e0ba2-7e4a-4de7-8f1d-dcefbcbc2a62 ------------------------------------------ """
-
-
-

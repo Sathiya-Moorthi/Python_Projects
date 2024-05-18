@@ -155,3 +155,4 @@ print(titanic_data_df)
 """------------------------------------ chatgpt : https://chatgpt.com/share/666174cd-2f8c-4cff-8eac-ac6eed87dfe6 ------------------------------------------ """
 
 
+runtime()
