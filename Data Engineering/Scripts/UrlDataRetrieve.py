@@ -1,4 +1,4 @@
-from  urllib.request import urlretrieve, Request, urlopen
+from urllib.request import urlretrieve, Request, urlopen
 
 url = "https://whimsical.com/basic-to-advance-data-engineer-roadmap-HxryZaFajFKqZyQEGtkVVk"
 output_file = "D:\MyProject\Data_Engineer_rodmap"
