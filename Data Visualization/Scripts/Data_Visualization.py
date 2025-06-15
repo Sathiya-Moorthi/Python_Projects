@@ -2,8 +2,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
- # Assuming you have the dataset (CSV file) in the same directory as your notebook
-titanic_data = pd.read_csv('titanic.csv')
+
+# Assuming you have the dataset (CSV file) in the same directory as your notebook
+titanic_data = pd.read_csv(r"D:\\Gayu's Project\\titanic.csv")
 print(titanic_data.head())
 
 # Get a summary of the dataset

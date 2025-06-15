@@ -17,4 +17,9 @@ else:
     print('false')
 
 # os.mkdir('Data')
-os.rmdir('Data')
+if path.exists('Data'):
+    os.rmdir('Data')
+    print("Directory found and deleted successfully")
+else:
+    print("No Directory found")
+

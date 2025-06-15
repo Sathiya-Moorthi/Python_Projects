@@ -30,6 +30,7 @@ print("Final result is :", np.dot(regions, weights))
 
 # to understand the floor and ceil function
 print("Final result is :", m.ceil(np.dot(regions, weights)))
+
 print("Final result is :", m.floor(np.dot(regions, weights)))
 
 """
